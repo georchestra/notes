@@ -33,12 +33,13 @@ mvn clean jar:jar install
  need, at least, to define one backend to be enable to store notes in database. You can define as many backend as you 
  want. Each backend must have a unique identifier under `id` key. For each backend, you need to define following keys :
   
-     * id : alphanumeric identifier of backend, Must be unique across backends.
-     * table : target table in configured database, may contains database schema
-     * srid : numeric identifier of projection used. For example : 4326
-     * jdbcUrl : jdbc URL to connect to database. For example : `jdbc:postgresql://localhost:5432/georchestra?user=www-data&password=www-data`
+   * id : alphanumeric identifier of backend, Must be unique across backends.
+   * table : target table in configured database, may contains database schema
+   * srid : numeric identifier of projection used. For example : 4326
+   * jdbcUrl : jdbc URL to connect to database. For example :    `jdbc:postgresql://localhost:5432/georchestra?user=www-data&password=www-data`
  
- Each previous keys must be prefixed with `note.x.` where x is sequential integer starting from 0. For example, if you 
+
+Each previous keys must be prefixed with `note.x.` where x is sequential integer starting from 0. For example, if you 
  want to define first backend identifier as `foo`, you need to define following property in `mapfishapp.properties` file
  in datadir : 
   
@@ -86,10 +87,10 @@ table that can be filled by this addon :
  ```
  
  The following field name are mandatory in target table :
-     * email
-     * comment
-     * login
-     * map_context
-     * the_geom
+   * email
+   * comment
+   * login
+   * map_context
+   * the_geom
  Other fields can be renamed.
  
