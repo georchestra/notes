@@ -70,7 +70,7 @@ note.2.jdbcUrl=jdbc:postgresql://database.internal:5432/intranet?user=intranet&p
 ## Database Configuration
 
 This addon will not create or alter database schema. So you need to create tables by hand before launching this addon. 
-Target database also need postgis extension in order to store geometry. You can use following SQL command to create a 
+Target database also need **postgis** extension in order to store geometry. You can use following SQL command to create a 
 table that can be filled by this addon :
  
  ```sql
