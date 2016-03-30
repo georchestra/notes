@@ -110,7 +110,8 @@ public class NoteController {
 
         JSONObject res = new JSONObject();
         res.put("backends",bes);
-        response.setHeader("Content-Type", "application/json");
+        // Note: "text/html" required for http://docs.sencha.com/extjs/3.4.0/#!/api/Ext.form.BasicForm
+        response.setContentType("text/html"); // Should be "application/json"
         response.getWriter().print(res.toString(4));
 
     }
@@ -142,7 +143,7 @@ public class NoteController {
                     "<input type=\"submit\" value=\"Store\">" +
                     "</form>";
 
-            response.setHeader("Content-Type", "text/html");
+            response.setContentType("text/html");
             response.getWriter().print(res);
         }
 
@@ -169,9 +170,14 @@ public class NoteController {
     public void storeNote(HttpServletRequest request, HttpServletResponse response, @PathVariable String backendId) throws IOException, SQLException {
 
         NoteBackend backend =  this.backends.get(backendId);
+        // Note: "text/html" required for http://docs.sencha.com/extjs/3.4.0/#!/api/Ext.form.BasicForm
+        response.setContentType("text/html");
+        JSONObject res = new JSONObject();
+
         if(backend == null) {
             response.setStatus(404);
-            response.getWriter().print("No such backend : " + backendId);
+            res.put("success", false);
+            res.put("msg", "No such backend : " + backendId);
         } else {
             double latitude = Double.parseDouble(request.getParameter("latitude"));
             double longitude = Double.parseDouble(request.getParameter("longitude"));
@@ -186,9 +192,11 @@ public class NoteController {
             if (request.getHeader("sec-username") != null)
                 Note.setLogin(request.getHeader("sec-username"));
             backend.store(Note);
-            response.getWriter().print("Note stored");
+            res.put("success", true);
+            res.put("msg", "Note stored");
         }
 
+        response.getWriter().print(res.toString());
     }
 
 }
