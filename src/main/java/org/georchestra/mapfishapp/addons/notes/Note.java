@@ -24,6 +24,7 @@ package org.georchestra.mapfishapp.addons.notes;
  */
 public class Note {
 
+	private Boolean followUp;
     private String email;
     private String comment;
     private String mapContext;
@@ -32,16 +33,17 @@ public class Note {
     private double longitude;
 
     /**
-     * Create a new instance of note, Note that 'login' field is optional, so it will be affected by following setter.
+     * Create a new instance of note, Note that 'login' and 'email' fields are optional, so they will be affected by following setter.
      *
+     * @param followUp Inform reporter of update on this issue
      * @param email E-mail address of reporter
      * @param comment Description of note
      * @param mapContext Description of layers enable when user create a note, this correspond to mapfishapp map context
      * @param latitude Latitude of note
      * @param longitude Longitude of note
      */
-    public Note(String email, String comment, String mapContext, double latitude, double longitude) {
-        this.email = email;
+    public Note(Boolean followUp, String comment, String mapContext, double latitude, double longitude) {
+        this.followUp = followUp;
         this.comment = comment;
         this.mapContext = mapContext;
         this.latitude = latitude;
@@ -55,6 +57,19 @@ public class Note {
      */
     public void setLogin(String login) {
         this.login = login;
+    }
+
+    /**
+     * Set email of reporter, as it is an optional field, this is the only way to specify email.
+     *
+     * @param email email of reporter
+     */
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public Boolean getFollowUp() {
+        return followUp;
     }
 
     public String getEmail() {

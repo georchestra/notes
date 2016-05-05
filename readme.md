@@ -76,12 +76,13 @@ table that can be filled by this addon :
  ```sql
  CREATE TABLE public.foo (
     id serial, 
-    email character varying NOT NULL, 
-    comment text NOT NULL, 
-    login character varying, 
-    map_context character varying NOT NULL, 
+    email character varying,
+    followup boolean NOT NULL,
+    comment text NOT NULL,
+    login character varying,
+    map_context character varying NOT NULL,
     creation_date timestamp without time zone NOT NULL DEFAULT NOW(),
-    the_geom geometry, 
+    the_geom geometry,
     CONSTRAINT foo_pk PRIMARY KEY (id)
  );
  ```

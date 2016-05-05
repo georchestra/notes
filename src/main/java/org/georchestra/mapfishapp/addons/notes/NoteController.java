@@ -135,6 +135,7 @@ public class NoteController {
         } else {
             String res = backend.toString() + "<br>" +
                     "<form method=\"POST\">" +
+                    "Email : <input type=\"checkbox\" name=\"followup\"><br>" +
                     "Email : <input type=\"text\" name=\"email\"><br>" +
                     "Comment : <input type=\"text\" name=\"comment\"><br>" +
                     "Map context : <input type=\"text\" name=\"map_context\"><br>" +
@@ -152,7 +153,8 @@ public class NoteController {
     /**
      * Request storage of one note to specified backend. Note description is passed through form parameter (not json
      * payload). The following parameters are accepted :
-     * - email (mandatory)
+     * - followup (mandatory)
+     * - email (optional)
      * - comment (mandatory)
      * - map_context (mandatory)
      * - latitude (mandatory)
@@ -183,11 +185,15 @@ public class NoteController {
             double longitude = Double.parseDouble(request.getParameter("longitude"));
 
             Note Note = new Note(
-                    request.getParameter("email"),
+                    Boolean.valueOf(request.getParameter("followup")),
                     request.getParameter("comment"),
                     request.getParameter("map_context"),
                     latitude,
                     longitude);
+
+            if (request.getParameter("email") != null) {
+                Note.setEmail(request.getParameter("email"));
+            }
 
             if (request.getHeader("sec-username") != null)
                 Note.setLogin(request.getHeader("sec-username"));
