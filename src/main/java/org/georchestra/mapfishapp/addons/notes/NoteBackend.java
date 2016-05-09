@@ -73,14 +73,15 @@ public class NoteBackend {
         PreparedStatement st = null;
        // try {
             connection = this.basicDataSource.getConnection();
-            st = connection.prepareStatement("INSERT INTO " + this.table + "(email, comment, map_context, login, the_geom) VALUES (?,?,?,?,ST_SetSRID(ST_MakePoint(?,?),?))");
-            st.setString(1, note.getEmail());
-            st.setString(2, note.getComment());
-            st.setString(3, note.getMapContext());
-            st.setString(4, note.getLogin());
-            st.setDouble(5, note.getLongitude());
-            st.setDouble(6, note.getLatitude());
-            st.setInt(7, this.srid);
+            st = connection.prepareStatement("INSERT INTO " + this.table + "(followup, email, comment, map_context, login, the_geom) VALUES (?,?,?,?,?,ST_SetSRID(ST_MakePoint(?,?),?))");
+            st.setBoolean(1, note.getFollowUp());
+            st.setString(2, note.getEmail());
+            st.setString(3, note.getComment());
+            st.setString(4, note.getMapContext());
+            st.setString(5, note.getLogin());
+            st.setDouble(6, note.getLongitude());
+            st.setDouble(7, note.getLatitude());
+            st.setInt(8, this.srid);
             st.executeUpdate();
 //        }
 //        catch (SQLException e) {
