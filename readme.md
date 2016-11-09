@@ -1,7 +1,7 @@
-# Note mapfishapp addon
+# Notes addon
 
-This addon add a feature in mapfishapp. This allow user to report geolocalized 'note' in mapfishapp.
- 
+This addon allows geOrchestra users to report a 'geonote' directly from their favorite viewer.
+
 ## Build
 
 ### Create JAR file
